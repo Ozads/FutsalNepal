@@ -42,7 +42,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 	public Docket api() {
 		LOG.info("swagger implementation");
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.texas.anexus.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.ozads.futsalnepal.controller"))
 				.paths(PathSelectors.any()).build().apiInfo(metaInfo());
 	}
 

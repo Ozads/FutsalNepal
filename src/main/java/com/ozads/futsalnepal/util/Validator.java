@@ -1,6 +1,7 @@
 package com.ozads.futsalnepal.util;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class Validator {
 	private static Pattern pattern;  
 	 private static Matcher matcher;  
