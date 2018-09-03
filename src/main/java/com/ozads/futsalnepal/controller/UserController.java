@@ -37,20 +37,19 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	
 	@ApiOperation(value="Create User",notes="Api to create user")
 	@RequestMapping( method = RequestMethod.POST)
-	public ResponseEntity<Object> saveUser(@RequestHeader Long userId ,@Validated @RequestBody UserCreationRequest userDto) {
+	public ResponseEntity<Object> saveUser(@Validated @RequestBody UserCreationRequest userDto) {
 		LOG.debug("Request for user creation in accepted");
-		userService.saveUser(userId,userDto);
+		userService.saveUser(userDto);
 		LOG.debug("user is created");
 		return new ResponseEntity<Object>("User Created",HttpStatus.CREATED);
 	}
 	
 
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	@ApiOperation(value="Delete User",notes="Api to delete users")
 	public ResponseEntity<Object> deletuser(@PathVariable("id") Long id){
@@ -59,8 +58,8 @@ public class UserController {
 		return new ResponseEntity<Object>("User Deleted",HttpStatus.OK);
 		
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Edit User",notes="Api to edit users")
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Object> editUser(@RequestHeader Long userId,@RequestBody UserEditRequest userEditRequest){
@@ -72,8 +71,8 @@ public class UserController {
 		
 		
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value=" Change Password",notes="Api to change password")
 	@RequestMapping(value="/changePassword",method=RequestMethod.PUT)
 	public ResponseEntity<Object> changePassword(@RequestHeader Long userId,
@@ -84,8 +83,8 @@ public class UserController {
 		
 	}
 	
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(method=RequestMethod.GET)
 	@ApiOperation(value="List all users",notes="Api to List all users")
 	public ResponseEntity<Object> listAllUser(){
@@ -94,8 +93,8 @@ public class UserController {
 		response.put("user", user);
 		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Get user",notes="Api to List a users")
 	@RequestMapping(value="/{userId}",method=RequestMethod.GET)
 	public ResponseEntity<Object> getUser(@RequestHeader Long userId){

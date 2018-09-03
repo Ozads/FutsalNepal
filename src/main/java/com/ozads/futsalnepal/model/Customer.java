@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+
 
 
 
@@ -31,16 +31,10 @@ public class Customer implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="first_name")
-	private String firstName;
-	
-	@Column(name="last_name")
-	private String lastName;
+	@Column(name="full_name")
+	private String fullname;
 	
 	private String email;
-	
-	@Size(min=5, max=30, message="Username must be between 5 to 30 characters")
-	private String username;
 	
 	@Column(name="phone_no")
 	private String phoneNo;
@@ -66,7 +60,6 @@ public class Customer implements Serializable{
 	@Column(name="modified_date")
 	private Date modifiedDate;
 
-	private String gender;
 	
 	
 	
@@ -92,15 +85,7 @@ public class Customer implements Serializable{
 	}
 
 
-	public String getGender() {
-		return gender;
-	}
-
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
+	
 
 	public Long getId() {
 		return id;
@@ -112,23 +97,13 @@ public class Customer implements Serializable{
 	}
 
 
-	public String getFirstName() {
-		return firstName;
+	public String getFullName() {
+		return fullname;
 	}
 
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFullName(String fullName) {
+		this.fullname = fullName;
 	}
 
 
@@ -142,14 +117,7 @@ public class Customer implements Serializable{
 	}
 
 
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 
 
 	public String getPhoneNo() {

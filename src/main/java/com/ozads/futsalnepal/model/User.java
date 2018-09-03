@@ -33,7 +33,7 @@ public class User implements Serializable{
 	@Column(name="full_name")
 	private String fullName;
 	
-	private String gender;
+	
 	
 	private String email;
 	
@@ -81,13 +81,7 @@ public class User implements Serializable{
 
 
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	
 
 	public Long getId() {
 		return id;

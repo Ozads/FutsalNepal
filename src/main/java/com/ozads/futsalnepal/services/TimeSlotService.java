@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ozads.futsalnepal.exceptions.AlreadyExistException;
+import com.ozads.futsalnepal.model.Court;
 import com.ozads.futsalnepal.model.TimeSlot;
 import com.ozads.futsalnepal.model.User;
 import com.ozads.futsalnepal.repository.TimeSlotRepository;
@@ -23,7 +24,7 @@ public class TimeSlotService {
 	TimeSlotRepository timeSlotRepository;
 
 	
-	public TimeSlot create(Long userID, TimeSlotCreatationRequest request) {
+	public TimeSlot create(Long courtID, TimeSlotCreatationRequest request) {
 		LOG.debug("TimeSlot uploded by admin");
 		TimeSlot timeSlot = timeSlotRepository.findTimeSlotByTimeSlotName(request.getTimeSlotName());
 		if (timeSlot != null) {
@@ -35,7 +36,8 @@ public class TimeSlotService {
 		
 		
 		it.setTimeSlotName(request.getTimeSlotName());
-		it.setUser(new User(userID));
+		it.setPrice(request.getPrice());
+		it.setCourt(new Court(courtID));
 
 		
 		timeSlotRepository.save(it);

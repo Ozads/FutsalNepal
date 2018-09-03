@@ -36,8 +36,8 @@ public class CourtController {
 	
 	@Autowired
 	private CourtService courtService;
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Save Court",notes="Api to save court")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Object> saveCourt(@RequestHeader Long userId,
@@ -48,8 +48,8 @@ public class CourtController {
 		return new ResponseEntity<Object>("Court Created",HttpStatus.CREATED);
 		
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Delete Court",notes="Api to Delete Court")
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteCourt(@RequestHeader Long userId,@PathVariable ("id") Long id){
@@ -57,8 +57,8 @@ public class CourtController {
 		  courtService.deleteCourt(userId,id);
 		return new ResponseEntity<Object>("Court Reported",HttpStatus.OK);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Edit Court",notes="Api to Edit Court")
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Object> editCourt(@RequestBody CourtEditRequest courtEditRequest){
@@ -67,8 +67,8 @@ public class CourtController {
 		LOG.debug("Court Edited");
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="List All Courts",notes="Api to List All Court")
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Object> listAllCourt(){
@@ -78,8 +78,8 @@ public class CourtController {
 		responce.put("court", court);
 		return new ResponseEntity<Object>(responce,HttpStatus.OK);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Get Court",notes="Api to get Court")
 	@RequestMapping(value="/{courtId}",method=RequestMethod.GET)
 	public ResponseEntity<Object> getCourt(@RequestHeader Long courtId){

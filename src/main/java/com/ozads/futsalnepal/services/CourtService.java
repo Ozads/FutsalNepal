@@ -65,10 +65,7 @@ public class CourtService {
 	@Autowired
 	CustomerRepository customerRepository;
 
-	/**
-	 * @param userId
-	 * @param courtCreatationRequest
-	 */
+	
 	@Transactional
 	public Court saveCourt(Long userId, CourtCreatationRequest courtCreatationRequest) {
 		LOG.debug("Message For Court Creatation");
@@ -78,10 +75,7 @@ public class CourtService {
 			throw new NotFoundException("User is not found");
 		}
 
-		Login l = loginRepository.findLoginByUsername(courtCreatationRequest.getUsername());
-		if (l != null) {
-			throw new AlreadyExistException("Username Already Exits");
-		}
+		
 
 		Court s = courtRepository.findByPhoneNoAndStatusNot(courtCreatationRequest.getPhoneNo(), Status.DELETED);
 		if (s != null) {
@@ -95,7 +89,7 @@ public class CourtService {
 		court.setStatus(Status.ACTIVE);
 		court.setCreatedDate(new Date());
 		court.setCreatedBy(userId);
-		court.setUsername(courtCreatationRequest.getUsername());
+		
 		court.setEmail(courtCreatationRequest.getEmail());
 		LOG.debug("Adding Court....");
 		Court ss = courtRepository.save(court);
@@ -106,9 +100,8 @@ public class CourtService {
 				LOG.debug("Address Adding");
 				for (CourtAddressCreatationRequest add : address) {
 					CourtAddress addresses = new CourtAddress();
-					addresses.setDistrict(add.getDistrict());
-					addresses.setArea(add.getArea());
-					addresses.setStreet(add.getStreet());
+					addresses.setLatitude(add.getLatitude());
+					addresses.setLongitude(add.getLongitude());
 					
 					addresses.setCourt(ss);
 
@@ -122,15 +115,14 @@ public class CourtService {
 				login.setPassword(Md5Hashing.getPw(RandomPassword.newPassword()));
 				login.setEmail(courtCreatationRequest.getEmail());
 				login.setLoginStatus(LoginStatus.LOGOUT);
-				login.setUsername(courtCreatationRequest.getUsername());
+				
 				login.setCourt(ss);
 				login.setCreatedDate(new Date());
 				login.setStatus(Status.ACTIVE);
 				login.setLoginType(LoginType.COURT);
 				Login ll = loginRepository.save(login);
 				if (ll != null) {
-					EmailUtility.sendNewPassword(courtCreatationRequest.getEmail(), ll.getPassword(),
-							courtCreatationRequest.getUsername());
+					EmailUtility.sendNewPassword(courtCreatationRequest.getEmail(), ll.getPassword());
 				}
 
 				LOG.debug("Login Added");
@@ -143,9 +135,7 @@ public class CourtService {
 		return court;
 	}
 
-	/**
-	 * @param id
-	 */
+	
 	@Transactional
 	public void deleteCourt(Long userId, Long id) {
 		LOG.debug("Deleteing ..");
@@ -205,9 +195,7 @@ public class CourtService {
 
 		
 
-		if (courtEditRequest.getUsername() != null) {
-			court.setUsername(courtEditRequest.getUsername());
-		}
+		
 
 		if (courtEditRequest.getPhoneNo() != null) {
 			court.setPhoneNo(courtEditRequest.getPhoneNo());
@@ -226,19 +214,16 @@ public class CourtService {
 					add = courtAddressRepository.findCourtAddressById(address.getId());
 				}
 
-				if (null != address.getDistrict()) {
-					add.setDistrict(address.getDistrict());
+				if (null != address.getLatitude()) {
+					add.setLatitude(address.getLatitude());
 				}
 				
-				if (null != address.getArea()) {
-					add.setArea(address.getArea());
+				if (null != address.getLongitude()) {
+					add.setLongitude(address.getLongitude());
 				}
 				
 
-				if (null != address.getStreet()) {
-					add.setStreet(address.getStreet());
-				}
-
+				
 				
 
 				add.setCourt(court);
@@ -263,9 +248,7 @@ public class CourtService {
 		}
 	}
 
-	/**
-	 * @return
-	 */
+	
 	public List<CourtDto> listAllCourts() {
 		LOG.debug("Request Accepted to list all courts");
 		List<Court> court = courtRepository.findAllCourtByStatusNot(Status.DELETED);
@@ -277,16 +260,15 @@ public class CourtService {
 			dto.setEmail(u.getEmail());
 			dto.setPhoneNo(u.getPhoneNo());
 			
-			dto.setUsername(u.getUsername());
+			
 			List<CourtAddressDto> courtAddress = new ArrayList<>();
 			List<CourtAddress> addresses = u.getCourtAddress();
 			if (addresses != null) {
 				addresses.stream().forEach(a -> {
 					CourtAddressDto courtAddressDto = new CourtAddressDto();
 					courtAddressDto.setId(a.getId());
-					courtAddressDto.setDistrict(a.getDistrict());
-					courtAddressDto.setArea(a.getArea());;
-					courtAddressDto.setStreet(a.getStreet());;
+					courtAddressDto.setLatitude(a.getLatitude());
+					courtAddressDto.setLongitude(a.getLongitude());
 					
 					courtAddress.add(courtAddressDto);
 				});
@@ -299,10 +281,7 @@ public class CourtService {
 		return courtDto;
 	}
 
-	/**
-	 * @param courtId
-	 * @return
-	 */
+	
 	public CourtResponseDto getCourt(Long courtId) {
 		LOG.debug("Request to get Court");
 		Court court = courtRepository.findByIdAndStatusNot(courtId, Status.DELETED);
@@ -314,7 +293,7 @@ public class CourtService {
 		courtResponseDto.setCourtName(court.getCourtName());
 		courtResponseDto.setEmail(court.getEmail());
 		
-		courtResponseDto.setUsername(court.getUsername());
+		
 		courtResponseDto.setPhoneNo(court.getPhoneNo());
 		List<CourtAddressResponse> addressResponses = new ArrayList<>();
 		List<CourtAddress> addresses = court.getCourtAddress();
@@ -322,10 +301,8 @@ public class CourtService {
 			addresses.stream().forEach(u -> {
 				CourtAddressResponse dd = new CourtAddressResponse();
 				dd.setId(u.getId());
-				dd.setDistrict(u.getDistrict());
-				dd.setArea(u.getArea());
-				
-				dd.setStreet(u.getStreet());
+				dd.setLatitude(u.getLatitude());
+				dd.setLongitude(u.getLongitude());
 				
 				addressResponses.add(dd);
 			});
@@ -346,14 +323,13 @@ public class CourtService {
 		List<Address> add = customer.getAddress();
 		if (add != null) {
 			add.stream().forEach(u -> {
-				String district=u.getDistrict();
-				String area=u.getArea();
-				String street=u.getStreet();
+				String latitude=u.getLatitude();
+				String longitude=u.getLongitude();
 				
-				System.out.println(district+""+area+""+street);
+				System.out.println(latitude+""+longitude);
 				
 				List<CourtAddress> address=courtAddressRepository.
-						findAddressByAreaAndStreet(area, street);
+						findAddressByLatitudeAndLongitude(latitude, longitude);
 
 						address.stream().forEach(a->{
 							CourtByAddressDto dto=new CourtByAddressDto();

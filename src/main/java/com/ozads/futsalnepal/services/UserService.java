@@ -49,9 +49,9 @@ public class UserService {
 	 * @param userDto
 	 */
 	@Transactional
-	public User saveUser(Long userId, UserCreationRequest userDto) {
+	public User saveUser(UserCreationRequest userDto) {
 		LOG.debug("User Creation...");
-		Login l = loginRepository.findLoginByUsername(userDto.getUsername());
+		Login l = loginRepository.findByEmail(userDto.getEmail());
 		if (l != null ) {
 			throw new AlreadyExistException("Username Already Exits");
 		}
@@ -64,11 +64,11 @@ public class UserService {
 		User user = new User();
 		user.setFullName(userDto.getFullName());
 		user.setEmail(userDto.getEmail());
-		user.setGender(userDto.getGender());
+		
 		user.setPhoneNo(userDto.getPhoneNo());
 		user.setCreatedDate(new Date());
-		user.setCreatedBy(userId);
-		user.setUsername(userDto.getUsername());
+		
+		
 		user.setUserRole(UserRole.ADMIN);
 		user.setStatus(Status.ACTIVE);
 
@@ -84,7 +84,7 @@ public class UserService {
 				login.setPassword(Md5Hashing.getPw(userDto.getPassword()));
 				login.setLoginStatus(LoginStatus.LOGOUT);
 				login.setCreatedDate(new Date());
-				login.setUsername(userDto.getUsername());
+				
 				login.setEmail(userDto.getEmail());
 				login.setUser(savedUser);
 				login.setLoginType(LoginType.ADMIN);
@@ -149,9 +149,7 @@ public class UserService {
 			user.setEmail(userEditRequest.getEmail());
 		}
 
-		if (userEditRequest.getGender() != null) {
-			user.setGender(userEditRequest.getGender());
-		}
+		
 
 		
 
@@ -191,7 +189,7 @@ public class UserService {
 
 		}
 
-		Login login = loginRepository.findByUsername(passwordEditRequest.getUsername());
+		Login login = loginRepository.findByEmail(passwordEditRequest.getEmail());
 		if (login == null) {
 			throw new ValidationException("Username not found");
 
@@ -229,9 +227,9 @@ public class UserService {
 			userDto.setId(u.getId());
 			userDto.setFullName(u.getFullName());
 			userDto.setEmail(u.getEmail());
-			userDto.setGender(u.getGender());
+			
 			userDto.setPhoneNo(u.getPhoneNo());
-			userDto.setUsername(u.getUsername());
+			
 			user.add(userDto);
 		});
 		LOG.debug("All User Are obtain");
@@ -253,7 +251,7 @@ public class UserService {
 		userResponceDto.setId(users.getId());
 		userResponceDto.setFullName(users.getFullName());
 		userResponceDto.setEmail(users.getEmail());
-		userResponceDto.setGender(users.getGender());
+		
 		userResponceDto.setPhoneNo(users.getPhoneNo());
 		userResponceDto.setUsername(users.getUsername());
 		LOG.debug("User obtain");

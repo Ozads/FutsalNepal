@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
+
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.ozads.futsalnepal.request.TimeSlotCreatationRequest;
 import com.ozads.futsalnepal.services.TimeSlotService;
@@ -28,13 +28,13 @@ public class TimeSlotController {
 	TimeSlotService timeSlotService;
 
 	private static final Logger LOG = LoggerFactory.getLogger(TimeSlotController.class);
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Save Timeslot")
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Object> saveTimeSlot(@RequestHeader Long userID, @RequestBody TimeSlotCreatationRequest request ) {
+	public ResponseEntity<Object> saveTimeSlot(@RequestHeader Long courtID, @RequestBody TimeSlotCreatationRequest request ) {
 		LOG.debug("items cratation by user");
-		timeSlotService.create(userID, request);
+		timeSlotService.create(courtID, request);
 		return new ResponseEntity<Object>("TimeSlot added",HttpStatus.CREATED);
 	}
 

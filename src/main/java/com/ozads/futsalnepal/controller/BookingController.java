@@ -34,8 +34,8 @@ public class BookingController {
 	BookingService bookingService;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BookingController.class);
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Save Booking")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Object> saveBooking(@RequestHeader Long customerId,@RequestHeader Long courtId,
@@ -44,8 +44,8 @@ public class BookingController {
 		bookingService.saveBooking(customerId,courtId,bookingRequest);
 		return new ResponseEntity<Object>("Booking added",HttpStatus.CREATED);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="List All Bookings")
 	@RequestMapping(value="/listAllBookingAvaliable",method=RequestMethod.GET)
 	public ResponseEntity<Object> listAllBooking(){
@@ -55,8 +55,8 @@ public class BookingController {
 		response.put("booking", responseDto);
 		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="List Bookings By Court")
 	@RequestMapping(value="/listBookingByCourt",method=RequestMethod.GET)
 	public ResponseEntity<Object> listBookingByCourt(@RequestHeader Long courtId){
@@ -69,8 +69,8 @@ public class BookingController {
 	
 	
 	
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Delete Booking")
 	@RequestMapping(value="/{bookingId}",method=RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteBooking(@PathVariable ("bookingId") Long bookingId){

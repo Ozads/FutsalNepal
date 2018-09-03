@@ -47,8 +47,8 @@ public class CustomerController {
 		   customerService.saveCustomer(customerCreationRequest);
 		return new ResponseEntity<Object>("Registered Sucessfull !Check Email to verify your account.",HttpStatus.CREATED);
 	}
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@ApiOperation(value="Delete customer",notes="Api to delete customer")
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteCustomer(@PathVariable ("id") Long id){
@@ -57,8 +57,8 @@ public class CustomerController {
 		return new ResponseEntity<Object>("Customer Deleted",HttpStatus.OK);
 	}
 	@ApiOperation(value="Edit customer",notes="Api to edit customer")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Object> editCustomer(@Validated @RequestBody CustomerEditRequest editRequest ){
 		 LOG.debug("Customer Edit Request");
@@ -66,8 +66,8 @@ public class CustomerController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	@ApiOperation(value="Change password",notes="Api to change password")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(value="/changePassword",method=RequestMethod.PUT)
 	public ResponseEntity<Object> changePassword(@RequestHeader Long customerId,
 			@RequestBody PasswordEditRequest passwordEditRequest){
@@ -77,8 +77,8 @@ public class CustomerController {
 		
 	}
 	@ApiOperation(value="Get customer",notes="Api to get customer")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(value="/customer/{customerId}",method=RequestMethod.GET)
 	public ResponseEntity<Object> getCustomer(@PathVariable Long customerId){
 		LOG.debug("Request accepted to get customer.");
@@ -89,8 +89,8 @@ public class CustomerController {
 		
 	}
 	@ApiOperation(value="List Customers",notes="Api to List Customer")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
+	//@ApiImplicitParams({
+		//@ApiImplicitParam(name="token",required=true,dataType="String",paramType="header")})
 	@RequestMapping(value="/listAll",method=RequestMethod.GET)
 	public ResponseEntity<Object> listAllCustomer(@RequestHeader Long loginId){
 		List<CustomerDto> customer=customerService.listAllCustomer();

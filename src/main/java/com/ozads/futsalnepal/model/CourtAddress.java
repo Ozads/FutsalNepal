@@ -18,10 +18,8 @@ public class CourtAddress implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String district;
-	private String area;
-
-	private String street;
+	private String longitude;
+	private String latitude;
 	
 
 	@ManyToOne
@@ -39,33 +37,26 @@ public class CourtAddress implements Serializable {
 	}
 
 
-	public String getDistrict() {
-		return district;
+	
+
+
+	public String getLongitude() {
+		return longitude;
 	}
 
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 
-	public String getArea() {
-		return area;
+	public String getLatitude() {
+		return latitude;
 	}
 
 
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-
-	public String getStreet() {
-		return street;
-	}
-
-
-	public void setStreet(String street) {
-		this.street = street;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
 

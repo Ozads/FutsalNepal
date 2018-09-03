@@ -23,20 +23,20 @@ public class EmailUtility {
 
 				Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("buzzozads@gmail.com","your pass");// change
+						return new PasswordAuthentication("futsalnepal60@gmail.com","FutsalNepal@60");// change
 																							// accordingly
 					}
 					});
 					try {
 						MimeMessage message1 = new MimeMessage(session);
-						message1.setFrom(new InternetAddress("buzzozads@gmail.com"));// change
+						message1.setFrom(new InternetAddress("futsalnepal60@gmail.com"));// change
 																					// accordingly
 						
 						
 						
 						message1.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 						message1.setSubject("Verify Account");
-						message1.setText("Click Here to verify your Account:" +"api to verify"+token);
+						message1.setText("Click Here to verify your Account:" +"http://192.168.137.190:8090/futsalnepal/api/v1/customer/"+token);
 						Transport.send(message1);
 
 					} catch (MessagingException e) {
@@ -58,7 +58,7 @@ public class EmailUtility {
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("buzzozads@gmail.com","your pass");// change
+				return new PasswordAuthentication("futsalnepal60@gmail.com","FutsalNepal@60");// change
 				// accordingly
 			}
 		});
@@ -66,7 +66,7 @@ public class EmailUtility {
 		// compose message
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("buzzozads@gmail.com"));// change
+			message.setFrom(new InternetAddress("futsalnepal60@gmail.com"));// change
 																			// accordingly
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Reset Password ");
@@ -79,7 +79,7 @@ public class EmailUtility {
 		}
 	}
 	
-	public static void sendNewPassword(String to, String password,String username) {
+	public static void sendNewPassword(String to, String password) {
 		// Get the session object
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -89,18 +89,18 @@ public class EmailUtility {
 		props.put("mail.smtp.port", "465");
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("buzzozads@gmail.com", "pass");// change
+				return new PasswordAuthentication("futsalnepal60@gmail.com", "FutsalNepal@60");// change
 			}
 		});
 
 		// compose message
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("buzzozads@gmail.com"));// change
+			message.setFrom(new InternetAddress("futsalnepal60@gmail.com"));// change
 																			// accordingly
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Your Account ");
-			message.setText("Your username is:"+ username);
+			
 			message.setText("Your password is......." + password);
 
 			Transport.send(message);

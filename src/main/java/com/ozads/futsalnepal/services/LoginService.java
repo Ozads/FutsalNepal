@@ -80,15 +80,15 @@ public class LoginService {
 
 	
 	@Transactional
-	public LoginResponseDto logInUser(String username, String password, Status active, String deviceId) {
+	public LoginResponseDto logInUser(String email, String password, Status active, String deviceId) {
 		LOG.debug("Request for Login");
-		Login login = loginRepository.findByUsernameAndStatusNot(username, Status.DELETED);
+		Login login = loginRepository.findLoginByEmailAndStatusNot(email, Status.DELETED);
 		if (login == null) {
 
 			throw new LoginFailException("Sorry,Username not found !!");
 		}
 
-		Login l = loginRepository.findByUsernameAndStatus(username, Status.BLOCKED);
+		Login l = loginRepository.findLoginByEmailAndStatus(email, Status.BLOCKED);
 		if (l != null) {
 			throw new VerificationException("Sorry Your Account is not verified Check Your Email");
 		}
@@ -182,7 +182,7 @@ public class LoginService {
 		}
 
 		TokenGenerator tg = new TokenGenerator();
-		String token = tg.generateToken(login.getUsername());
+		String token = tg.generateToken(login.getEmail());
 
 		Verification verification = verificationRepository.findVerificationByEmailAndStatusNot(email,
 				VerificationStatus.EXPIRE);

@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
-
 import com.ozads.futsalnepal.util.Status;
 
 @SuppressWarnings("serial")
@@ -39,8 +37,7 @@ public class Court implements Serializable {
 	
 	private String email;
 	
-	@Size(min=5, max=30, message="Username must be between 5 to 30 characters")
-	private String username;
+	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_date")
@@ -153,13 +150,7 @@ public class Court implements Serializable {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 
 	public Date getCreatedDate() {
 		return createdDate;

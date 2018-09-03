@@ -8,10 +8,8 @@ public class CourtAddressDto implements Serializable {
 
 	private Long id;
 
-	private String district;
-	private String area;
-	
-	private String street;
+	private String latitude;
+	private String longitude;
 
 	public Long getId() {
 		return id;
@@ -21,29 +19,22 @@ public class CourtAddressDto implements Serializable {
 		this.id = id;
 	}
 
-	public String getDistrict() {
-		return district;
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
-	public String getArea() {
-		return area;
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setArea(String area) {
-		this.area = area;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
 	
 	
 	

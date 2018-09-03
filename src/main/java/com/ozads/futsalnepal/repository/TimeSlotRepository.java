@@ -9,10 +9,7 @@ import com.ozads.futsalnepal.model.TimeSlot;
 @Repository
 public interface TimeSlotRepository  extends JpaRepository<TimeSlot, Long>{
 
-	/**
-	 * @param itemsName
-	 * @return
-	 */
+	
 	TimeSlot findTimeSlotByTimeSlotName(String timeSlotName);
 
 }

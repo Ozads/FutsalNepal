@@ -7,34 +7,22 @@ import java.io.Serializable;
 public class CustomerAddressCreationRequest implements Serializable {
 
 	
-	private String district;
-	private String area;
+	private String longitude;
+	private String latitude;
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
 	
-	private String street;
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
+	
 	
 
 	

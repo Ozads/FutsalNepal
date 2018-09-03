@@ -2,51 +2,36 @@ package com.ozads.futsalnepal.request;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 public class AddressEditRequest implements Serializable {
 
-	
-	private String district;
-	private String area;
-
-	private String street;
-	
+	@JsonIgnore
 	private Long id;
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
+	
+	private String longitude;
+	private String latitude;
+	
+	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		longitude = longitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
 
 	
-	
-	
-
 }

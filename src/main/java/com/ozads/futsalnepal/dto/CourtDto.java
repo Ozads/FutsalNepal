@@ -12,7 +12,7 @@ public class CourtDto implements Serializable {
 	private String phoneNo;
 	
 	private String email;
-	private String username;
+	
 	List<CourtAddressDto> address;
 	
 	public String getCourtName() {
@@ -40,13 +40,7 @@ public class CourtDto implements Serializable {
 		this.email = email;
 	}
 	
-	public String getUsername() {
-		return username;
-	}
 	
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
 	public List<CourtAddressDto> getAddress() {
 		return address;

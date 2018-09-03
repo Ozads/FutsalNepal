@@ -7,6 +7,17 @@ import java.io.Serializable;
 public class TimeSlotCreatationRequest implements Serializable {
 	
 	private String timeSlotName;
+	private double price;
+	
+	
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public String getTimeSlotName() {
 		return timeSlotName;

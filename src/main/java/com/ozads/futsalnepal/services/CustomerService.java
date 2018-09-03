@@ -68,15 +68,12 @@ public class CustomerService {
 	@Autowired
 	VerificationService verificationService;
 
-	/**
-	 * @param customerCreationRequest
-	 */
 	@Transactional
 	public Customer saveCustomer(CustomerCreationRequest customerCreationRequest) {
 		LOG.debug("Customer Creation started..");
-		Login l = loginRepository.findByUsernameAndStatusNot(customerCreationRequest.getUsername(), Status.DELETED);
+		Login l = loginRepository.findLoginByEmailAndStatusNot(customerCreationRequest.getEmail(), Status.DELETED);
 		if (l != null) {
-			throw new AlreadyExistException("Username Already Exits");
+			throw new AlreadyExistException("Email Already Exits");
 		}
 
 		Customer c = customerRepository.findByEmailAndStatusNot(customerCreationRequest.getEmail(), Status.DELETED);
@@ -85,17 +82,17 @@ public class CustomerService {
 		}
 		System.out.println(customerCreationRequest.getEmail().toString());
 		Customer customer = new Customer();
-		customer.setFirstName(customerCreationRequest.getFirstName());
-		customer.setLastName(customerCreationRequest.getLastName());
+		customer.setFullName(customerCreationRequest.getFullName());
+		
 		customer.setEmail(customerCreationRequest.getEmail());
-		customer.setGender(customerCreationRequest.getGender());
+		
 		customer.setPhoneNo(customerCreationRequest.getPhoneNo());
 		customer.setStatus(Status.ACTIVE);
-		customer.setUsername(customerCreationRequest.getUsername());
+		
 		customer.setCreatedDate(new Date());
 		
 		TokenGenerator tg = new TokenGenerator();
-		String token = tg.generateToken(customerCreationRequest.getUsername());
+		String token = tg.generateToken(customerCreationRequest.getEmail());
 
 		Verification verification = verificationRepository
 				.findVerificationByEmailAndStatusNot(customerCreationRequest.getEmail(), VerificationStatus.EXPIRE);
@@ -124,7 +121,7 @@ public class CustomerService {
 				login.setPassword(Md5Hashing.getPw(customerCreationRequest.getPassword()));
 				login.setCreatedDate(new Date());
 				login.setEmail(customerCreationRequest.getEmail());
-				login.setUsername(customerCreationRequest.getUsername());
+				
 				login.setCustomer(savedCustomer);
 				login.setLoginType(LoginType.CUSTOMER);
 				login.setStatus(Status.BLOCKED);
@@ -138,9 +135,8 @@ public class CustomerService {
 			if (address != null) {
 				for (CustomerAddressCreationRequest add : address) {
 					Address addresses = new Address();
-					addresses.setDistrict(add.getDistrict());
-					addresses.setArea(add.getArea());
-					addresses.setStreet(add.getStreet());
+					addresses.setLatitude(add.getLatitude());
+					addresses.setLongitude(add.getLongitude());
 					
 					addresses.setCustomer(savedCustomer);
 
@@ -201,9 +197,7 @@ public class CustomerService {
 
 
 
-		if (editRequest.getGender() != null) {
-			customer.setGender(editRequest.getGender());
-		}
+		
 		if (editRequest.getEmail() != null) {
 			customer.setEmail(editRequest.getEmail());
 		}
@@ -216,13 +210,11 @@ public class CustomerService {
 //			customer.setUsername(editRequest.getUsername());
 //		}
 
-		if(editRequest.getFirstName()!=null) {
-			customer.setFirstName(editRequest.getFirstName());
+		if(editRequest.getFullName()!=null) {
+			customer.setFullName(editRequest.getFullName());
 		}
 		
-		if(editRequest.getLastName()!=null) {
-			customer.setLastName(editRequest.getLastName());
-		}
+		
 
 		if (editRequest.getAddress() != null) {
 			List<AddressEditRequest> addressEditRequests = editRequest.getAddress();
@@ -237,15 +229,13 @@ public class CustomerService {
 					add = addressRepository.findAddressById(address.getId());
 				}
 
-				if (null != address.getDistrict()) {
-					add.setDistrict(address.getDistrict());
+				if (null != address.getLongitude()) {
+					add.setLongitude(address.getLongitude());
 				}
-				if (null != address.getArea()) {
-					add.setArea(add.getArea());
+				if (null != address.getLatitude()) {
+					add.setLatitude(add.getLatitude());
 				}
-				if (null != address.getStreet()) {
-					add.setStreet(address.getStreet());
-				}
+				
 				
 
 				add.setCustomer(customer);
@@ -270,21 +260,9 @@ public class CustomerService {
 		}
 	}
 //
-//	private void usernameDuplication(String username, Customer customer) {
-//		LOG.debug("Check for Username dublication");
-//		Customer c = customerRepository.findByUsernameAndStatusNot(username, Status.DELETE);
-//		if (c != null && customer.getId().equals(c.getId())) {
 //
-//			throw new AlreadyExitException("Username Already Exit");
-//
-//		}
 
-//	}
-
-	/**
-	 * @param customerId
-	 * @param passwordEditRequest
-	 */
+	
 	@Transactional
 	public void changePassword(Long customerId, PasswordEditRequest passwordEditRequest) {
 		LOG.debug("Request Acccepted to change password");
@@ -293,7 +271,7 @@ public class CustomerService {
 
 		}
 
-		Login login = loginRepository.findByUsername(passwordEditRequest.getUsername());
+		Login login = loginRepository.findByEmail(passwordEditRequest.getEmail());
 
 		try {
 			if (login == null) {
@@ -329,11 +307,10 @@ public class CustomerService {
 			throw new NotFoundException("Customer Not found");
 		}
 		CustomerResponseDto customerResponseDto = new CustomerResponseDto();
-	    customerResponseDto.setFirstName(customer.getFirstName());
-	    customerResponseDto.setLastName(customer.getLastName());
-		customerResponseDto.setGender(customer.getGender());
+	    customerResponseDto.setFullName(customer.getFullName());
+	    
 		customerResponseDto.setEmail(customer.getEmail());
-		customerResponseDto.setUsername(customer.getUsername());
+		
 		customerResponseDto.setPhoneNo(customer.getPhoneNo());;
 
 		List<AddressResponseDto> adddresss = new ArrayList<>();
@@ -342,9 +319,9 @@ public class CustomerService {
 			add.stream().forEach(u -> {
 				AddressResponseDto dd = new AddressResponseDto();
 				dd.setId(u.getId());
-				dd.setDistrict(u.getDistrict());
-				dd.setArea(u.getArea());;
-				dd.setStreet(u.getStreet());
+				dd.setLatitude(u.getLatitude());
+				dd.setLongitude(u.getLongitude());;
+				
 				
 				adddresss.add(dd);
 			});
@@ -354,9 +331,7 @@ public class CustomerService {
 		return customerResponseDto;
 	}
 
-	/**
-	 * @return
-	 */
+	
 	public List<CustomerDto> listAllCustomer() {
 		LOG.debug("Request to get All customer");
 		List<Customer> customer = customerRepository.findAllCustomerByStatusNot(Status.DELETED);
@@ -367,11 +342,10 @@ public class CustomerService {
 		customer.stream().forEach(u -> {
 			CustomerDto customerDto = new CustomerDto();
 			customerDto.setId(u.getId());
-			customerDto.setFirstName(u.getFirstName());
-			customerDto.setLastName(u.getLastName());
+			customerDto.setFullName(u.getFullName());
+			
 			customerDto.setEmail(u.getEmail());
-			customerDto.setGender(u.getGender());
-			customerDto.setUsername(u.getUsername());
+		
 			customerDto.setPhoneNo(u.getPhoneNo());
 			List<AddressDto> adddresss = new ArrayList<>();
 			List<Address> add = u.getAddress();
@@ -379,9 +353,8 @@ public class CustomerService {
 				add.stream().forEach(a -> {
 					AddressDto dd = new AddressDto();
 					dd.setId(a.getId());
-					dd.setDistrict(a.getDistrict());
-					dd.setArea(a.getArea());;
-					dd.setStreet(a.getStreet());
+					dd.setLatitude(a.getLatitude());
+					dd.setLongitude(a.getLongitude());
 					
 					adddresss.add(dd);
 				});
@@ -394,9 +367,7 @@ public class CustomerService {
 		return customers;
 	}
 
-	/**
-	 * @param token
-	 */
+	
 	public void getVerify(String token) {
 
 		Verification v = verificationRepository.findVerificationByTokenAndStatusNot(token, VerificationStatus.EXPIRE);

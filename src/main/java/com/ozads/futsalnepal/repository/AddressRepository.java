@@ -10,12 +10,7 @@ import com.ozads.futsalnepal.model.Address;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-	/**
-	 * @param id
-	 * @return
-	 */
 	Address findAddressById(Long id);
-
 
 
 }

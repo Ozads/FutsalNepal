@@ -11,7 +11,7 @@ public class CourtEditRequest implements Serializable {
 	private String phoneNo;
 	
 	private String email;
-	private String username;
+	
 	private List<CourtAddressEditRequest> courtAddressEdit;
 	public Long getId() {
 		return id;
@@ -37,12 +37,7 @@ public class CourtEditRequest implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	public List<CourtAddressEditRequest> getCourtAddressEdit() {
 		return courtAddressEdit;
 	}

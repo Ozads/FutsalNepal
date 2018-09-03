@@ -37,8 +37,8 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiOperation(value="Login",notes="Api to Login")
 	public ResponseEntity<Object> login(@Valid @RequestBody LoginDto loginDto) {
-		LOG.debug("Login Request", loginDto.getUsername());
-		LoginResponseDto loginResponceDto = loginService.logInUser(loginDto.getUsername(), loginDto.getPassword(),
+		LOG.debug("Login Request", loginDto.getEmail());
+		LoginResponseDto loginResponceDto = loginService.logInUser(loginDto.getEmail(), loginDto.getPassword(),
 				Status.ACTIVE, loginDto.getDeviceId());
 		return new ResponseEntity<Object>(new LoginResponse(loginResponceDto), HttpStatus.OK);
 	}

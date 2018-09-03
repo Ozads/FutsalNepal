@@ -2,8 +2,10 @@ package com.ozads.futsalnepal.dto;
 
 import java.io.Serializable;
 
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import com.ozads.futsalnepal.util.LoginType;
 import com.ozads.futsalnepal.util.Status;
 import com.ozads.futsalnepal.util.UserRole;
@@ -13,11 +15,10 @@ import com.ozads.futsalnepal.util.UserRole;
 public class LoginResponseDto implements Serializable {
 	
 	private Long id;
-	private String firstName;
-	private String lastName;
+	private String fullName;
 	private String email;
-	private String phonrNo;
-	private String username;
+	private String phoneNo;
+	
 	private String deviceId;
 	private Status status;
 	private UserRole userRole;
@@ -28,73 +29,115 @@ public class LoginResponseDto implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
+
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getFirstName() {
-		return firstName;
+
+
+
+	public String getFullName() {
+		return fullName;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhonrNo() {
-		return phonrNo;
+
+
+
+	public String getPhoneNo() {
+		return phoneNo;
 	}
-	public void setPhonrNo(String phonrNo) {
-		this.phonrNo = phonrNo;
+
+
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
+
+
 	public String getDeviceId() {
 		return deviceId;
 	}
+
+
+
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
+
+
+
 	public Status getStatus() {
 		return status;
 	}
+
+
+
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+
+
 	public UserRole getUserRole() {
 		return userRole;
 	}
+
+
+
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+
+
+
 	public LoginType getLoginType() {
 		return loginType;
 	}
+
+
+
 	public void setLoginType(LoginType loginType) {
 		this.loginType = loginType;
 	}
+
+
+
 	public String getToken() {
 		return token;
 	}
+
+
+
 	public void setToken(String token) {
-		token = token;
+		this.token = token;
 	}
-	
+
 	
 	public static class Builder {
 		private Long id;
@@ -111,15 +154,12 @@ public class LoginResponseDto implements Serializable {
 			return this;
 		}
 
-
+		
 			public LoginResponseDto build() {
 			return new LoginResponseDto(this);
 		}
-		
-		
-
 	}
-	
+
 	private LoginResponseDto(Builder builder) {
 		this.id = builder.id;
 		this.token = builder.token;

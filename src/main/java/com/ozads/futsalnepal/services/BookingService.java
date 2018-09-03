@@ -89,7 +89,7 @@ public class BookingService {
 			responseDto.setBookingName(u.getBookingName());
 			responseDto.setBookingDate(u.getBookingDate());
 			responseDto.setPrice(u.getPrice());
-			responseDto.setBookingBy(c.getFirstName()+" "+c.getLastName());
+			responseDto.setBookingBy(c.getFullName());
 			responseDto.getBookingBy();
 			
 			List<AddressResponseDto> adddresss=new ArrayList<>();
@@ -98,9 +98,8 @@ public class BookingService {
 				add.stream().forEach(a -> {
 					AddressResponseDto dd = new AddressResponseDto();
 					dd.setId(a.getId());
-					dd.setDistrict(a.getDistrict());
-					dd.setArea(a.getArea());
-					dd.setStreet(a.getStreet());
+					dd.setLatitude(a.getLatitude());
+					dd.setLongitude(a.getLongitude());
 					
 					adddresss.add(dd);
 				});
@@ -114,9 +113,8 @@ public class BookingService {
 				adds.stream().forEach(a -> {
 					CourtAddressResponse dd = new CourtAddressResponse();
 					dd.setId(a.getId());
-					dd.setDistrict(a.getDistrict());
-					dd.setArea(a.getArea());
-					dd.setStreet(a.getStreet());
+					dd.setLatitude(a.getLatitude());
+					dd.setLongitude(a.getLongitude());
 					
 					adddres.add(dd);
 				});
@@ -158,7 +156,7 @@ public class BookingService {
 			bookingResponseDto.setBookingDate(u.getBookingDate());
 			bookingResponseDto.setPrice(u.getPrice());
 			
-			bookingResponseDto.setBookingBy(u.getCustomer().getFirstName()+" "+u.getCustomer().getLastName());
+			bookingResponseDto.setBookingBy(u.getCustomer().getFullName());
 			
 			
 			List<AddressResponseDto> addressResponseDtos=new ArrayList<>();
@@ -168,9 +166,8 @@ public class BookingService {
 					AddressResponseDto dto=new AddressResponseDto();
 					dto.setId(u.getId());
 					
-					dto.setDistrict(a.getDistrict());
-					dto.setArea(a.getArea());
-					dto.setStreet(a.getStreet());
+					dto.setLatitude(a.getLatitude());
+					dto.setLongitude(a.getLongitude());
 					
 					addressResponseDtos.add(dto);
 					

@@ -12,24 +12,22 @@ import com.ozads.futsalnepal.model.CourtAddress;
 @Repository
 public interface CourtAddressRepository extends JpaRepository<CourtAddress,Long> {
 
-	/**
-	 * @param id
-	 * @return
-	 */
+
 	CourtAddress findCourtAddressById(Long id);
 
 	
 	
-	/**
-	 * @param storeName
-	 * @return
-	 */
+	
 	List<Court> findAllCourtByCourt(String courtName);
 
 
 
 	
-	List<CourtAddress> findAddressByAreaAndStreet(String area, String street);
+	
+
+
+
+	List<CourtAddress> findAddressByLatitudeAndLongitude(String latitude, String longitude);
 
 
 }
