@@ -135,8 +135,9 @@ public class CustomerService {
 			if (address != null) {
 				for (CustomerAddressCreationRequest add : address) {
 					Address addresses = new Address();
-					addresses.setLatitude(add.getLatitude());
-					addresses.setLongitude(add.getLongitude());
+					addresses.setDistrict(add.getDistrict());
+					addresses.setLocality(add.getLocality());
+					addresses.setWardNo(add.getWardNo());
 					
 					addresses.setCustomer(savedCustomer);
 
@@ -229,13 +230,19 @@ public class CustomerService {
 					add = addressRepository.findAddressById(address.getId());
 				}
 
-				if (null != address.getLongitude()) {
-					add.setLongitude(address.getLongitude());
-				}
-				if (null != address.getLatitude()) {
-					add.setLatitude(add.getLatitude());
+				
+				
+				if (null != address.getDistrict()) {
+					add.setDistrict(address.getDistrict());
 				}
 				
+				if (null != address.getLocality()) {
+					add.setLocality(address.getLocality());
+				}
+				
+				if (null != address.getWardNo()) {
+					add.setWardNo(address.getWardNo());
+				}
 				
 
 				add.setCustomer(customer);
@@ -319,8 +326,9 @@ public class CustomerService {
 			add.stream().forEach(u -> {
 				AddressResponseDto dd = new AddressResponseDto();
 				dd.setId(u.getId());
-				dd.setLatitude(u.getLatitude());
-				dd.setLongitude(u.getLongitude());;
+				dd.setDistrict(u.getDistrict());
+				dd.setLocality(u.getLocality());
+				dd.setWardNo(u.getWardNo());
 				
 				
 				adddresss.add(dd);
@@ -353,8 +361,9 @@ public class CustomerService {
 				add.stream().forEach(a -> {
 					AddressDto dd = new AddressDto();
 					dd.setId(a.getId());
-					dd.setLatitude(a.getLatitude());
-					dd.setLongitude(a.getLongitude());
+					dd.setDistrict(a.getDistrict());
+					dd.setLocality(a.getLocality());
+					dd.setWardNumber(a.getWardNo());
 					
 					adddresss.add(dd);
 				});

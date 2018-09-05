@@ -8,26 +8,36 @@ public class AddressDto implements Serializable {
 	
 	private Long id;
 
-	private String longitude;
-	private String latitude;
+	private String district;
+	private String locality;
+	private Long wardNumber;
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getLongitude() {
-		return longitude;
+	public String getDistrict() {
+		return district;
 	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
-	public String getLatitude() {
-		return latitude;
+	public String getLocality() {
+		return locality;
 	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
+	public Long getWardNumber() {
+		return wardNumber;
+	}
+	public void setWardNumber(Long wardNumber) {
+		this.wardNumber = wardNumber;
+	}
+	
+	
 	
 	
 

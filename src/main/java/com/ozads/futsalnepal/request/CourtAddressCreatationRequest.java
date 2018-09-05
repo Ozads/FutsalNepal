@@ -7,20 +7,29 @@ import java.io.Serializable;
 public class CourtAddressCreatationRequest implements Serializable {
 
 
-	private String longitude;
-	private String latitude;
-	public String getLongitude() {
-		return longitude;
+	private String district;
+	private String locality;
+	private Long wardNo;
+	public String getDistrict() {
+		return district;
 	}
-	public void setLongitude(String longitude) {
-		longitude = longitude;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
-	public String getLatitude() {
-		return latitude;
+	public String getLocality() {
+		return locality;
 	}
-	public void setLatitude(String latitude) {
-		latitude = latitude;
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
+	public Long getWardNo() {
+		return wardNo;
+	}
+	public void setWardNo(Long wardNo) {
+		this.wardNo = wardNo;
+	}
+	
+	
 	
 	
 	

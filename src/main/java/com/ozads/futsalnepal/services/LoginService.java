@@ -126,10 +126,7 @@ public class LoginService {
 		throw new LoginFailException("Username and Password missmatch");
 	}
 
-	/**
-	 * @param login
-	 * @return
-	 */
+	
 	private LoginResponseDto getLoginResponse(Login login) {
 		LoginResponseDto loginResponceDto=new LoginResponseDto();
 		if(login.getLoginType().equals(LoginType.CUSTOMER)) {
@@ -139,10 +136,7 @@ public class LoginService {
 		return loginResponceDto;
 	}
 
-	/**
-	 * @param userId
-	 * @return
-	 */
+	
 	public Login logout(Long userId) {
 		LOG.debug("request for logout");
 		if (userId != null) {
@@ -161,18 +155,13 @@ public class LoginService {
 		return null;
 	}
 
-	/**
-	 * @param login
-	 */
 	@Transactional
 	public void saveLogin(Login login) {
 
 		loginRepository.save(login);
 	}
 
-	/**
-	 * @param email
-	 */
+	
 	@Transactional
 	public void resetPassword(String email) {
 		LOG.debug("Request to reset Password");
@@ -206,9 +195,7 @@ public class LoginService {
 		LOG.debug("Request to reset Password accepted");
 	}
 
-	/**
-	 * @param forgetPasswordRequest
-	 */
+	
 	@Transactional
 	public void resetForgetPassword(String token, ForgetPasswordRequest forgetPasswordRequest) {
 
@@ -248,9 +235,7 @@ public class LoginService {
 		LOG.debug("Password is reset");
 	}
 
-	/**
-	 * @param token
-	 */
+	
 	public void chekToken(String token) {
 		Login login=loginRepository.findByToken(token);
 		if(login==null) {
@@ -262,11 +247,7 @@ public class LoginService {
 	
 }
 
-	/**
-	 * @param loginId
-	 * @param token
-	 * @return
-	 */
+	
 	public boolean isValidToken(Long loginId, String token) {
 		
 		if(loginId==null || token==null) {

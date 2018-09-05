@@ -36,7 +36,7 @@ public class EmailUtility {
 						
 						message1.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 						message1.setSubject("Verify Account");
-						message1.setText("Click Here to verify your Account:" +"http://192.168.137.190:8090/futsalnepal/api/v1/customer/"+token);
+						message1.setText("Click Here to verify your Account:" +"http://localhost:8090/futsalnepal/api/v1/customer/"+token);
 						Transport.send(message1);
 
 					} catch (MessagingException e) {
@@ -70,7 +70,7 @@ public class EmailUtility {
 																			// accordingly
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Reset Password ");
-			message.setText("Click Here to Reset your password:" +"http://localhost:8080/swagger-ui.html#!/login-controller/resetPasswordUsingPOST/"+token);
+			message.setText("Click Here to Reset your password:" +"http://localhost:8090/futsalnepal/swagger-ui.html#!/login-controller/resetPasswordUsingPOST/"+token);
 
 			Transport.send(message);
 

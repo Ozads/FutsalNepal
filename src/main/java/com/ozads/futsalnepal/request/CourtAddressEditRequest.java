@@ -8,8 +8,9 @@ public class CourtAddressEditRequest implements Serializable {
 	
 	private Long id;
 	
-	private String latitude;
-	private String longitude;
+	private String district;
+	private String locality;
+	private Long wardNo;
 
 	public Long getId() {
 		return id;
@@ -19,21 +20,30 @@ public class CourtAddressEditRequest implements Serializable {
 		this.id = id;
 	}
 
-	public String getLatitude() {
-		return latitude;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
-	public String getLongitude() {
-		return longitude;
+	public String getLocality() {
+		return locality;
 	}
 
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
+
+	public Long getWardNo() {
+		return wardNo;
+	}
+
+	public void setWardNo(Long wardNo) {
+		this.wardNo = wardNo;
+	}
+
 
 	
 	

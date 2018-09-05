@@ -14,20 +14,10 @@ public interface CourtAddressRepository extends JpaRepository<CourtAddress,Long>
 
 
 	CourtAddress findCourtAddressById(Long id);
-
-	
-	
 	
 	List<Court> findAllCourtByCourt(String courtName);
 
-
-
-	
-	
-
-
-
-	List<CourtAddress> findAddressByLatitudeAndLongitude(String latitude, String longitude);
+	List<CourtAddress> findAddressByDistrictAndLocalityAndWardNo(String district, String locality, Long wardNo);
 
 
 }

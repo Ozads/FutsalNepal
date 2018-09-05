@@ -100,8 +100,9 @@ public class CourtService {
 				LOG.debug("Address Adding");
 				for (CourtAddressCreatationRequest add : address) {
 					CourtAddress addresses = new CourtAddress();
-					addresses.setLatitude(add.getLatitude());
-					addresses.setLongitude(add.getLongitude());
+					addresses.setDistrict(add.getDistrict());
+					addresses.setLocality(add.getLocality());
+					addresses.setWardNo(add.getWardNo());
 					
 					addresses.setCourt(ss);
 
@@ -214,12 +215,16 @@ public class CourtService {
 					add = courtAddressRepository.findCourtAddressById(address.getId());
 				}
 
-				if (null != address.getLatitude()) {
-					add.setLatitude(address.getLatitude());
+				if (null != address.getDistrict()) {
+					add.setDistrict(address.getDistrict());
 				}
 				
-				if (null != address.getLongitude()) {
-					add.setLongitude(address.getLongitude());
+				if (null != address.getLocality()) {
+					add.setLocality(address.getLocality());
+				}
+				
+				if (null != address.getWardNo()) {
+					add.setWardNo(address.getWardNo());
 				}
 				
 
@@ -267,8 +272,9 @@ public class CourtService {
 				addresses.stream().forEach(a -> {
 					CourtAddressDto courtAddressDto = new CourtAddressDto();
 					courtAddressDto.setId(a.getId());
-					courtAddressDto.setLatitude(a.getLatitude());
-					courtAddressDto.setLongitude(a.getLongitude());
+					courtAddressDto.setDistrict(a.getDistrict());
+					courtAddressDto.setLocality(a.getLocality());
+					courtAddressDto.setWardNumber(a.getWardNo());
 					
 					courtAddress.add(courtAddressDto);
 				});
@@ -301,8 +307,9 @@ public class CourtService {
 			addresses.stream().forEach(u -> {
 				CourtAddressResponse dd = new CourtAddressResponse();
 				dd.setId(u.getId());
-				dd.setLatitude(u.getLatitude());
-				dd.setLongitude(u.getLongitude());
+				dd.setDistrict(u.getDistrict());
+				dd.setLocality(u.getLocality());
+				dd.setWardNo(u.getWardNo());
 				
 				addressResponses.add(dd);
 			});
@@ -323,13 +330,14 @@ public class CourtService {
 		List<Address> add = customer.getAddress();
 		if (add != null) {
 			add.stream().forEach(u -> {
-				String latitude=u.getLatitude();
-				String longitude=u.getLongitude();
+				String district=u.getDistrict();
+				String locality=u.getLocality();
+				Long wardNo=u.getWardNo();
 				
-				System.out.println(latitude+""+longitude);
+				System.out.println(district+""+locality+""+wardNo);
 				
 				List<CourtAddress> address=courtAddressRepository.
-						findAddressByLatitudeAndLongitude(latitude, longitude);
+						findAddressByDistrictAndLocalityAndWardNo(district, locality, wardNo);
 
 						address.stream().forEach(a->{
 							CourtByAddressDto dto=new CourtByAddressDto();

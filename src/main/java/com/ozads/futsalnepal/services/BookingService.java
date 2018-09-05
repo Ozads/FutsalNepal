@@ -98,8 +98,9 @@ public class BookingService {
 				add.stream().forEach(a -> {
 					AddressResponseDto dd = new AddressResponseDto();
 					dd.setId(a.getId());
-					dd.setLatitude(a.getLatitude());
-					dd.setLongitude(a.getLongitude());
+					dd.setDistrict(a.getDistrict());
+					dd.setLocality(a.getLocality());
+					dd.setWardNo(a.getWardNo());
 					
 					adddresss.add(dd);
 				});
@@ -113,8 +114,9 @@ public class BookingService {
 				adds.stream().forEach(a -> {
 					CourtAddressResponse dd = new CourtAddressResponse();
 					dd.setId(a.getId());
-					dd.setLatitude(a.getLatitude());
-					dd.setLongitude(a.getLongitude());
+					dd.setDistrict(a.getDistrict());
+					dd.setLocality(a.getLocality());
+					dd.setWardNo(a.getWardNo());
 					
 					adddres.add(dd);
 				});
@@ -166,8 +168,9 @@ public class BookingService {
 					AddressResponseDto dto=new AddressResponseDto();
 					dto.setId(u.getId());
 					
-					dto.setLatitude(a.getLatitude());
-					dto.setLongitude(a.getLongitude());
+					dto.setDistrict(a.getDistrict());
+					dto.setLocality(a.getLocality());
+					dto.setWardNo(a.getWardNo());
 					
 					addressResponseDtos.add(dto);
 					
